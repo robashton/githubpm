@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Web app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, minimum-scale=0.4">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="js/es5-shim.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Test app</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a id="new-story" href="#">New Story</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="issue-list">
+         
+      </div>
+    </div>
+
+    <div id="template-issue" class="template">
+      <div id="placeholder" class="issue">
+        <h3 class="title"></h3>
+        <div class="description"></div>
+      </div>
+    </div>
+
+    <div id="new-card-dialog" class="modal">
+      <div class="modal-body">
+        <form id="new-card-form">
+          <label>Title</label><input type="text" name="title"/>
+          <label>Description</label><textarea name="description" class="input-xlarge" id="textarea"></textarea>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="save-new-card" type="submit" class="btn btn-primary">Save</button>
+        <button id="cancel-new-card" class="btn">Cancel</button>
+      </div>
+    </div>
+
+    <script src="js/underscore-min.js"></script>
+    <script src="js/plates.js"></script>
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/hammer.js"></script>
+    <script src="js/jquery.hammer.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
