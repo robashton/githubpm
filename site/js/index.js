@@ -20,7 +20,7 @@
     issueTemplateMap
         .where('id').is('placeholder').insert('id')
         .class('title').to('title')
-        .class('description').to('description')
+        .class('description').to('body')
 
     issueTemplateText = $('#template-issue').html()
   }
