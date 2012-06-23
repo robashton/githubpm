@@ -3,6 +3,7 @@
 , "version" : "0.0.1"
 , "dependencies" : {
     "express" : ""
-,   "everyauth" : "git://github.com/bnoguchi/everyauth.git"
+,   "passport" : ""
+,   "passport-github" : ""
   }
 }
