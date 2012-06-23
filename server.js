@@ -1,6 +1,7 @@
 var express = require('express')
 ,   https = require('https')
 ,   passport = require('passport')
+,   _ = require('underscore')
 ,   GitHubStrategy = require('passport-github').Strategy
 
 var users = {}
@@ -63,6 +64,7 @@ function makeGithubRequest(path, user, cb) {
     }
   }, 
   function(res) {
+  console.log('REALLY STARTING')
     var data = '';
 
     res.on('data', function (chunk) {

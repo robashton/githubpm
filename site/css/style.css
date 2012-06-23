@@ -1,61 +1,7 @@
-body {
-  padding-top: 60px;
-  width: 1224px;
-}
 .modal {
   display: none;
 }
 
 .template {
   display: none;
-}
-
-h1 {
-  margin-bottom: 5px;
-}
-
-#card-columns {
-}
-
-#card-columns h3 {
-  margin-left: 10px;
-  margin-right: 10px;
-  border-bottom: 1px solid #000;
-}
-
-#card-columns > div {
-  width: 180px;
-  min-height: 500px;
-  border-right: 1px solid #000;
-  float: left;
-}
-
-#card-columns > div:nth-of-type(1) {
-  border-left: 1px solid #000;
-}
-
-#card-columns li.card {
-  cursor: pointer;
-  margin-top: 20px;
-  margin-left: 40px;
-}
-
-.dragging {
-  position: absolute;
-  border: 3px solid #000;
-}
-
-
-.dragtarget {
-  background-color: #FDD;
-}
-
-
-.floating {
-  position: absolute;
-  -webkit-transition: all 1s ease-in-out;
-  -moz-transition: all 1s ease-in-out;
-  -o-transition: all 1s ease-in-out;
-  -ms-transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
 }

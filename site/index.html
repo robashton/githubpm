@@ -7,12 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/metro.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <style>
-    </style>
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <script src="js/es5-shim.min.js"></script>
@@ -20,37 +16,26 @@
 
   </head>
 
-  <body>
+  <body class="whitebg blue">
+    <h1>Github</h1> 
+    <h3>PM Edition</h3>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Test app</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a id="new-story" href="#">New Story</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div id="issue-list">
+    <div class="repo-container" class="tiles">
+      <div id="repo-list" class="tilerow">
          
       </div>
     </div>
 
-    <div id="template-issue" class="template">
-      <div id="placeholder" class="issue">
-        <h3 class="title"></h3>
-        <div class="description"></div>
+    <div class="issue-container" class="tiles">
+      <div id="issue-list" class="tilerow">
+        
+      <div>
+    </div>
+
+    <div id="template-repo" class="template">
+      <div id="placeholder" class="issue tile one bluebg">
+        <h1 class="issuecount"></h1>
+        <h5 class="title"></h5>
       </div>
     </div>
 
@@ -73,7 +58,7 @@
     <script src="js/jquery-1.7.2.min.js"></script>
     <script src="js/hammer.js"></script>
     <script src="js/jquery.hammer.js"></script>
-    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="js/jquery.metro.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

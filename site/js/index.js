@@ -8,7 +8,7 @@
   })
 
   function refreshIssueList() {
-    var target = $('#issue-list')
+    var target = $('#repo-list')
     fetchIssues(function(issues) {
       var html = Plates.bind(issueTemplateText, issues, issueTemplateMap) 
       target.html(html)
@@ -19,10 +19,10 @@
     issueTemplateMap = Plates.Map()
     issueTemplateMap
         .where('id').is('placeholder').insert('id')
-        .class('title').to('title')
-        .class('description').to('body')
+        .class('title').to('name')
+        .class('issuecount').to('open_issues')
 
-    issueTemplateText = $('#template-issue').html()
+    issueTemplateText = $('#template-repo').html()
   }
   function fetchIssues(cb) {
     $.getJSON('/issues/all', cb)
