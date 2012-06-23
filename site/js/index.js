@@ -57,12 +57,24 @@
     var commentTarget = $('#item-comments')
 
     fetchIssue(selectedRepo, issueId, function(issue) {
-      var html = Plates.bind(itemTemplateText, issue, itemTemplateMap)
+      var html = Plates.bind(itemTemplateText, {
+        body: issue.body,
+        title: issue.title,
+        avatar: issue.user.avatar_url
+      }, itemTemplateMap)
       target.html(html)
     })
 
     fetchIssueComments(selectedRepo, issueId, function(comments) {
-      var html = Plates.bind(commentTemplateText, comments, commentTemplateMap)
+      var html = '';
+      for(var i = 0 ; i < comments.length ; i++) {
+        var comment = comments[i]
+        html += Plates.bind(commentTemplateText, {
+           body: comment.body,
+           avatar: comment.user.avatar_url
+        },
+        commentTemplateMap)
+      }
       commentTarget.html(html)
     })
   }
@@ -89,16 +101,18 @@
     itemTemplateMap
         .class('title').to('title')
         .class('body').to('body')
+        .where('src').is('image').insert('avatar')
 
     itemTemplateText = $('#template-item').html()
    
     commentTemplateMap = Plates.Map()
     commentTemplateMap
-        .class('title').to('title')
         .class('body').to('body')
+        .where('src').is('image').insert('avatar')
     
     commentTemplateText = $('#template-comment').html()
 
+    $('#newcomment').wysihtml5()
   }
 
   function fetchIssueComments(repoId, issueId, cb) {

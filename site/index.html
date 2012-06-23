@@ -7,8 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link href="wysihtml5/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet">
     <link href="css/metro.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <script src="js/es5-shim.min.js"></script>
@@ -40,7 +42,11 @@
         <div id="item-comments">
 
         </div>
-      </div>
+        <div id="item-newcomment">
+          <textarea id="newcomment"></textarea>
+        </div>
+
+     </div>
 
     </div>
 
@@ -61,13 +67,22 @@
     </div>
 
     <div id="template-item" class="template">
-      <h3 class="title"></h3>
-      <div class="body" ></div>
+      <div class="content">
+        <img class="issue-avatar" src="image"></img>
+        <div class="text">
+          <h3 class="title"></h3>
+          <div class="body" ></div>
+        </div>
+      </div>
+      <div class="break"></div>
     </div>
 
     <div id="template-comment" class="template">
-      <h3 class="title"></h3>
-      <div class="body"></div>
+      <div class="content">
+        <img class="comment-avatar" src="image"></img>
+        <div class="body"></div>
+      </div>
+      <div class="break"></div>
     </div>
 
 
@@ -85,12 +100,15 @@
       </div>
     </div>
 
+    <script src="js/bootstrap-min.js"></script>
+    <script src="wysihtml5/wysihtml5-0.3.0_rc2.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <script src="js/plates.js"></script>
     <script src="js/jquery-1.7.2.min.js"></script>
     <script src="js/hammer.js"></script>
     <script src="js/jquery.hammer.js"></script>
     <script src="js/jquery.metro.js"></script>
+    <script src="wysihtml5/bootstrap-wysihtml5-0.0.2.min.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

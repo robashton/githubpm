@@ -6,5 +6,6 @@
 ,   "passport" : ""
 ,   "passport-github" : ""
 ,   "underscore" : ""
+,   "less" : ""
   }
 }

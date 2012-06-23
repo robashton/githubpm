@@ -2,6 +2,7 @@ var express = require('express')
 ,   https = require('https')
 ,   passport = require('passport')
 ,   _ = require('underscore')
+,   less = require('less')
 ,   GitHubStrategy = require('passport-github').Strategy
 
 var users = {}
@@ -24,6 +25,15 @@ passport.use(new GitHubStrategy({
       return done(null, profile)
     }));
 
+// Hack connect.js to allow relative @import statements in less.js
+express.compiler.compilers.less.compile = function(str, fn) {
+try {
+   less.render(str, {paths: [ __dirname + '/site/css']}, fn);
+ } catch (err) {
+  fn(err);
+ }
+};
+
 var server = express.createServer()
 
 server.configure(function() {
@@ -35,6 +45,7 @@ server.configure(function() {
   server.use(passport.initialize());
   server.use(passport.session());
   server.use(server.router)
+  server.use(express.compiler({ src: __dirname + '/site', enable: ['less']}));
 })
 server.listen(8080)
 
