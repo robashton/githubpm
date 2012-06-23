@@ -5,6 +5,8 @@
   ,   issueTemplateText = null
   ,   itemTemplateMap = null
   ,   itemTemplateText = null
+  ,   commentTemplateMap = null
+  ,   commentTemplateText = null
   ,   selectedRepo = null
 
   $(document).ready(function() {
@@ -51,10 +53,17 @@
   }
 
   function loadIssue(issueId) { 
-    var target = $('#item-container')
+    var target = $('#item-details')
+    var commentTarget = $('#item-comments')
+
     fetchIssue(selectedRepo, issueId, function(issue) {
       var html = Plates.bind(itemTemplateText, issue, itemTemplateMap)
       target.html(html)
+    })
+
+    fetchIssueComments(selectedRepo, issueId, function(comments) {
+      var html = Plates.bind(commentTemplateText, comments, commentTemplateMap)
+      commentTarget.html(html)
     })
   }
 
@@ -82,6 +91,18 @@
         .class('body').to('body')
 
     itemTemplateText = $('#template-item').html()
+   
+    commentTemplateMap = Plates.Map()
+    commentTemplateMap
+        .class('title').to('title')
+        .class('body').to('body')
+    
+    commentTemplateText = $('#template-comment').html()
+
+  }
+
+  function fetchIssueComments(repoId, issueId, cb) {
+    $.getJSON('/issues/' + repoId + '/' + issueId + '/comments', cb)
   }
 
   function fetchIssue(repoId, issueId, cb) {

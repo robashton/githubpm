@@ -72,6 +72,18 @@ server.get('/issues/:repo', function(req, res) {
   })
 })
 
+server.get('/issues/:repo/:issueId/comments', function(req, res) {
+  makeGithubRequest('/repos/' 
+                    + req.user.username + '/' +
+                    req.params.repo + '/issues/' 
+                    + req.params.issueId + 
+                    '/comments',
+                    req.user,
+                    function(err, data) {
+    res.send(data)
+ })
+})
+
 function makeGithubRequest(path, user, cb) {
   console.log(path, user.token)
  var request = https.get({
@@ -82,7 +94,6 @@ function makeGithubRequest(path, user, cb) {
     }
   }, 
   function(res) {
-  console.log('REALLY STARTING')
     var data = '';
 
     res.on('data', function (chunk) {
