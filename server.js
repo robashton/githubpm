@@ -49,13 +49,22 @@ server.get('/auth/github/callback',
   });
 
 
-server.get('/issues/all', function(req, res) {
+server.get('/repos/all', function(req, res) {
   makeGithubRequest('/user/repos', req.user, function(err, data) {
     res.send(data)
  })
-});
+})
+
+server.get('/issues/:repo', function(req, res) {
+  console.log(req.user)
+  makeGithubRequest('/repos/' + req.user.username + '/' + req.params.repo + '/issues',
+                    req.user, function(err, data) {
+    res.send(data) 
+  })
+})
 
 function makeGithubRequest(path, user, cb) {
+  console.log(path, user.token)
  var request = https.get({
     host: 'api.github.com', 
     path: path,
