@@ -22,7 +22,7 @@
     var repoElement = $(this)
     ,   repoId = repoElement.data('repo')
     loadRepoIssues(repoId)
-    $('#repo-container').removeClass('forefront').addClass('background')
+    $('#repo-container').removeClass('forefront').addClass('background').addClass('hidden')
     $('#issue-container').removeClass('background').addClass('forefront')
   }
 

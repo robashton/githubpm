@@ -56,7 +56,6 @@ server.get('/repos/all', function(req, res) {
 })
 
 server.get('/issues/:repo', function(req, res) {
-  console.log(req.user)
   makeGithubRequest('/repos/' + req.user.username + '/' + req.params.repo + '/issues',
                     req.user, function(err, data) {
     res.send(data) 

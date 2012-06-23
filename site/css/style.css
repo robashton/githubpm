@@ -10,9 +10,16 @@
   cursor: pointer;
 }
 
+#container {
+  position: relative;
+}
+
 .content-container {
   -webkit-transition-property: opacity, transform;
   -webkit-transition-duration: 0.5s;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
 .forefront {
@@ -22,5 +29,5 @@
 
 .background {
   -webkit-opacity: 0.0;
-  -webkit-transform: scale(0.01, 0.01)
+  -webkit-transform: scale(0.01, 0.01);
 }
