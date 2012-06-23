@@ -55,6 +55,16 @@ server.get('/repos/all', function(req, res) {
  })
 })
 
+server.get('/issues/:repo/:issueId', function(req, res) {
+  makeGithubRequest('/repos/' + req.user.username + '/' + 
+                      req.params.repo + '/issues/' + 
+                      req.params.issueId, 
+                      req.user,
+                      function(err, data) {
+    res.send(data)
+  })
+})
+
 server.get('/issues/:repo', function(req, res) {
   makeGithubRequest('/repos/' + req.user.username + '/' + req.params.repo + '/issues',
                     req.user, function(err, data) {
