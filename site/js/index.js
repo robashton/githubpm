@@ -48,7 +48,6 @@
     issueTemplateMap
         .where('id').is('placeholder').insert('id')
         .class('title').to('title')
-        .class('name').to('name')
     issueTemplateText = $('#template-issue').html()
   }
 
