@@ -5,3 +5,22 @@
 .template {
   display: none;
 }
+
+.tile {
+  cursor: pointer;
+}
+
+.content-container {
+  -webkit-transition-property: opacity, transform;
+  -webkit-transition-duration: 0.5s;
+}
+
+.forefront {
+  -webkit-opacity: 1.0;
+  -webkit-transform: none;
+}
+
+.background {
+  -webkit-opacity: 0.0;
+  -webkit-transform: scale(0.01, 0.01)
+}

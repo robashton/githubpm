@@ -12,6 +12,10 @@
     fetchIssues(function(issues) {
       var html = Plates.bind(issueTemplateText, issues, issueTemplateMap) 
       target.html(html)
+      $('.repo').click(function() {
+        $('#repo-container').removeClass('forefront').addClass('background')
+        $('#issue-container').removeClass('background').addClass('forefront')
+      })
     })
   }
 
