@@ -7,7 +7,9 @@
   ,   itemTemplateText = null
   ,   commentTemplateMap = null
   ,   commentTemplateText = null
+
   ,   selectedRepo = null
+  ,   selectedIssue = null
 
   $(document).ready(function() {
     createTemplates()
@@ -112,7 +114,38 @@
     
     commentTemplateText = $('#template-comment').html()
 
-    $('#newcomment').wysihtml5()
+    $('#newcomment').wysihtml5({
+      "font-styles": false, 
+      "emphasis": false, 
+      "lists": false, 
+      "html": false,
+      "link": false, 
+      "image": false 
+    })
+    $('#btn-newcomment').click(createNewComment)
+
+  }
+
+  function createNewComment() {
+    var text = $('#newcomment').val()
+    console.log(text)
+    saveComment(selectedRepo, selectedIssue, text, function(data) {
+      var target = $('#item-comments')      
+      target.append(Plates.bind(
+           commentTemplateText, {
+           body: data.body,  
+           avatar: data.user.avatar_url
+           },
+           commentTemplateMap))
+      $('#newcomment').val('')
+    })
+  }
+
+  function saveComment(repoId, issueId, text, cb) {
+    $.post('/issues/' + repoId + '/' + issueId + '/comments', 
+        {text : text}, 
+        cb, 
+    "json");
   }
 
   function fetchIssueComments(repoId, issueId, cb) {

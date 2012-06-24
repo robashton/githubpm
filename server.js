@@ -4,6 +4,7 @@ var express = require('express')
 ,   _ = require('underscore')
 ,   less = require('less')
 ,   GitHubStrategy = require('passport-github').Strategy
+,   toMarkdown = require('to-markdown').toMarkdown
 
 var users = {}
 
@@ -16,9 +17,11 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new GitHubStrategy({
-      clientID: 'ad2622e4ecf41b39e8eb',
-      clientSecret: '9b651769f9c63fa8707148b3c41e69fdb6bf41ba',
-      callbackURL: "http://localhost:8080/auth/github/callback"
+        clientID: 'ad2622e4ecf41b39e8eb'
+      , clientSecret: '9b651769f9c63fa8707148b3c41e69fdb6bf41ba'
+      , callbackURL: "http://localhost:8080/auth/github/callback"
+      , scope: [ 'public_repo' ]
+
     },
     function(accessToken, refreshToken, profile, done) {
       profile.token = accessToken
@@ -85,19 +88,59 @@ server.get('/issues/:repo', function(req, res) {
 
 server.get('/issues/:repo/:issueId/comments', function(req, res) {
   makeGithubRequest('/repos/' 
-                    + req.user.username + '/' +
-                    req.params.repo + '/issues/' 
+                    + req.user.username + '/'
+                    + req.params.repo + '/issues/' 
                     + req.params.issueId + 
-                    '/comments',
-                    req.user,
-                    function(err, data) {
+                    '/comments'
+                    , req.user
+                    , function(err, data) {
     res.send(data)
  })
 })
 
+server.post('/issues/:repo/:issueId/comments', function(req, res) {
+  postGithub('/repos/'
+                  + req.user.username + '/'
+                  + req.params.repo + '/issues/'
+                  + req.params.issueId + '/comments'
+                  , JSON.stringify({
+                    body: toMarkdown(req.body.text) 
+                  })
+                  , req.user
+                  , function(err, data) {
+      res.send(data)
+  })
+})
+
+
+function postGithub(path, data, user, cb) {
+  console.log('POST', path, data, user.token)
+  var req = https.request({
+    host: 'api.github.com',
+    path: path,
+    method: 'POST',
+    headers: {
+      'Authorization' : 'token ' + user.token
+    , 'Content-Length' : data.length
+    }
+  },
+  function(res) {
+    var ret = ''
+    res.on('data', function(chunk) {
+      ret += chunk 
+    })
+    res.on('end', function() {
+      console.log(res.statusCode)
+      cb(null, ret)
+    })
+  })
+  req.write(data)
+  req.end()
+}
+
 function makeGithubRequest(path, user, cb) {
-  console.log(path, user.token)
- var request = https.get({
+  console.log('GET', path, user.token)
+  https.get({
     host: 'api.github.com', 
     path: path,
     headers: {
@@ -105,17 +148,17 @@ function makeGithubRequest(path, user, cb) {
     }
   }, 
   function(res) {
-    var data = '';
+    var data = ''
 
     res.on('data', function (chunk) {
-      data += chunk;
-    });
+      data += chunk
+    })
     res.on('end', function() {
-      cb(null, data);
-    });
+      cb(null, data)
+    })
   })
   .on('error', function(e) {
       cb(e, null)
-  });
+  })
 }
 
